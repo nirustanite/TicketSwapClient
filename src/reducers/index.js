@@ -5,6 +5,8 @@ import messages from './messages'
 import redirect from './redirect'
 import user from './user'
 import events from './events'
+import eventDetail from './eventDetail'
+import tickets from './tickets'
 
 export default combineReducers({
    createUser,
@@ -12,5 +14,7 @@ export default combineReducers({
    messages,
    redirect,
    user,
-   events
+   events,
+   eventDetail,
+   tickets
 })

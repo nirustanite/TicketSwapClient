@@ -6,6 +6,7 @@ import Pagination from "react-js-pagination";
 import ReactPaginate from 'react-paginate';
 import "bootstrap/dist/css/bootstrap.min.css";
 import Grid from '@material-ui/core/Grid';
+import {url} from '../constants'
 
 window.React = React;
 
@@ -27,18 +28,11 @@ class EventListContainer extends React.Component{
         }
     }
 
-    componentDidUpdate(){
-        //this.props.eventsList.events.map((_,event) => console.log(event))
-        // this.setState({
-        //     data:this.props.eventsList.events
-        // })
-    }
-
     handlePageClick = data => {
         const selected = data.selected
         let offset = Math.ceil(selected * 9);
         this.setState({offset : offset}, () => {
-            this.props.loadEvents({limit: 9, offset: this.state.offset})
+            this.props.loadEvents({limit: 9, offset: this.state.offset,data})
         })
       }
 

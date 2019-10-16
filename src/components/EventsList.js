@@ -14,6 +14,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
 import { useSelector } from 'react-redux';
+import {url} from '../constants';
+import Image from 'material-ui-image'
 
 const useStyles = makeStyles(theme => ({
   icon: {
@@ -47,7 +49,6 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 export default function EventsList(props) {
   const classes = useStyles();
@@ -83,20 +84,16 @@ export default function EventsList(props) {
             {props.events && props.events.map((event,i) => (
                <Grid item key={i} xs={12} sm={6} md={4}>
                 <Card className={classes.card}>
-                  <CardMedia
-                    className={classes.cardMedia}
-                    image="https://source.unsplash.com/random"
-                    title="Image title"
-                  />
+                    <Image src={`${url}/images/event/${event.id}`}/>
                   <CardContent className={classes.cardContent}>
                     <Typography gutterBottom variant="h5" component="h2">
-                      {event.eventname}
+                      Event Name:{event.eventname}
                     </Typography>
                     <Typography>
-                      {event.description}
+                      Event Description: {event.description}
                     </Typography>
                     <Typography>
-                      {event.startDate}
+                      Start Date: {event.startDate}
                     </Typography>
                   </CardContent>
                   <CardActions>
@@ -123,3 +120,6 @@ export default function EventsList(props) {
     </React.Fragment>
   );
 }
+
+
+// image="https://source.unsplash.com/random"
