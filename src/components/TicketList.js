@@ -12,6 +12,9 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
+import { useSelector } from 'react-redux';
+import Image from 'material-ui-image'
+import {url} from '../constants';
 
 const useStyles = makeStyles(theme => ({
   icon: {
@@ -57,11 +60,12 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-
-export default function Album() {
+const cards = [1,2,3,4,5,6,7,8,9]
+export default function TicketList(props) {
   const classes = useStyles();
-
+  console.log(props.details)
+  console.log(props.tickets)
+  const user = useSelector(state => state.user);
   return (
     <React.Fragment>
       <CssBaseline />
@@ -72,28 +76,48 @@ export default function Album() {
             <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
               Ticket app
             </Typography>
+            {props.details && 
+            <Grid container spacing={1} direction="column" alignItems="center">
+            <Typography component="h3"  align="center" color="textPrimary" gutterBottom>
+              {props.details.eventname}
+            </Typography>
+            <Typography component="h3"  align="center" color="textPrimary" gutterBottom>
+              {props.details.description}
+            </Typography>
+            <Typography component="h3"  align="center" color="textPrimary" gutterBottom>
+              {props.details.startDate}
+            </Typography>
+            <Typography component="h3"  align="center" color="textPrimary" gutterBottom>
+              {props.details.endDate}
+            </Typography>
+              </Grid>}
             <Typography variant="h5" align="center" color="textSecondary" paragraph>
-              Various events are displayed.
+              Tickets for the corresponding events are displayed
             </Typography>
           </Container>
         </div>
         <Container className={classes.cardGrid} maxWidth="md">
           {/* End hero unit */}
           <Grid container spacing={4}>
-            {cards.map(card => (
-              <Grid item key={card} xs={12} sm={6} md={4}>
+           {props.details && props.tickets &&
+            props.tickets.map((ticket)=> (
+              <Grid item key={ticket.id} xs={12} sm={6} md={4}>
                 <Card className={classes.card}>
-                  <CardMedia
+                  {/* <CardMedia
                     className={classes.cardMedia}
                     image="https://source.unsplash.com/random"
                     title="Image title"
-                  />
+                  /> */}
+                  <Image src={`${url}/images/event/${props.details.id}/ticket/${ticket.id}`}/>
                   <CardContent className={classes.cardContent}>
                     <Typography gutterBottom variant="h5" component="h2">
-                      Heading
+                     Price : {ticket.price}
                     </Typography>
                     <Typography>
-                      This is a media card. You can use this section to describe the content.
+                      Description : {ticket.description}
+                    </Typography>
+                    <Typography>
+                      Quantity : {ticket.quantity}
                     </Typography>
                   </CardContent>
                   <CardActions>
@@ -106,6 +130,16 @@ export default function Album() {
             ))}
           </Grid>
         </Container>
+        <Grid container spacing={1} direction="column" alignItems="center">
+        {user.jwt && 
+                <Button
+                 align="center"
+                 type="submit"
+                 variant="contained"
+                 color="primary"
+                 onClick={props.onSubmit}
+                >AddTicket</Button>}
+        </Grid>
       </main>
     </React.Fragment>
   );

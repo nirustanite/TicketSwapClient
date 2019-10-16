@@ -10,6 +10,12 @@ const listOfEvents = (data) => {
    }
 }
 
+const eventDetailFetch = event => ({
+    type: EVENT_DETAIL_FETCH,
+    event
+})
+
+
 export const loadEvents = (data) => (dispatch) => {
     console.log("inside loadevents")
     request
@@ -22,4 +28,14 @@ export const loadEvents = (data) => (dispatch) => {
         .catch(err => console.error(err))
 }
 
-export const EVENTS_FETCHED = 'EVENTS_FETCHED'
+export const eventDetails = (id) => (dispatch) =>{
+    request
+        .get(`${url}/event/${id}`)
+        .then(response => {
+            console.log(response.body);
+            dispatch(eventDetailFetch(response.body))
+        })
+}
+
+export const EVENTS_FETCHED = 'EVENTS_FETCHED';
+export const EVENT_DETAIL_FETCH = 'EVENT_DETAIL_FETCH'

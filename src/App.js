@@ -4,7 +4,7 @@ import { Route } from 'react-router-dom'
 import EventsListContainer from './components/EventsListContainer'
 import SignInContainer from './components/SignInContainer'
 import SignUpContainer from './components/SignUpContainer'
-import TicketList from './components/TicketList'
+import TicketListContainer from './components/TicketListContainer'
 import TicketDetails from './components/TicketDetails'
 import Toolbar from '@material-ui/core/Toolbar';
 import AppBar from '@material-ui/core/AppBar';
@@ -52,7 +52,7 @@ function App(){
           <Route path="/" exact component={EventsListContainer} />
           <Route path="/login" component={SignInContainer} />
           <Route path="/signup" component={SignUpContainer} />
-          <Route path="/ticketlist/:id" component={TicketList} />
+          <Route path="/ticketlist/:id" component={TicketListContainer} />
           <Route path="/ticketdetails" component={TicketDetails} />
           <Route path="/logout" component={Logout} />
         </React.Fragment>
