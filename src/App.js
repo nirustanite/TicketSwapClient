@@ -1,26 +1,64 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { Route } from 'react-router-dom'
+import EventsListContainer from './components/EventsListContainer'
+import SignInContainer from './components/SignInContainer'
+import SignUpContainer from './components/SignUpContainer'
+import TicketList from './components/TicketList'
+import TicketDetails from './components/TicketDetails'
+import Toolbar from '@material-ui/core/Toolbar';
+import AppBar from '@material-ui/core/AppBar';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import { makeStyles } from '@material-ui/core/styles';
+import Link from '@material-ui/core/Link';
+import { useSelector } from 'react-redux';
+import Logout from './components/Logout'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-            Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const useStyles = makeStyles(theme => ({
+  appBar: {
+    borderBottom: `1px solid ${theme.palette.divider}`,
+  },
+  toolbar: {
+    flexWrap: 'wrap',
+  },
+  toolbarTitle: {
+    flexGrow: 1,
+  },
+  link: {
+    margin: theme.spacing(1, 1.5),
+  },
+}));
+
+function App(){
+  const classes = useStyles();
+  const user = useSelector(state => state.user);
+  console.log("user state after login",user)
+      return(
+        <React.Fragment>
+                <CssBaseline />
+                <AppBar position="static" color="inherit" elevation={0} className={classes.appBar}>
+                   <Toolbar className={classes.toolbar}>
+                        <Link href="/" variant="h6" color="primary" noWrap className={classes.toolbarTitle}>
+                              Buy and Sell Ticket App
+                        </Link>
+                        {!user.jwt &&
+                        <Link href="/login" variant="body2">
+                              Login
+                        </Link>}
+                        {user.jwt && 
+                         <Link href="/logout">{user.firstname}</Link>}
+                      </Toolbar>
+                </AppBar>
+          <Route path="/" exact component={EventsListContainer} />
+          <Route path="/login" component={SignInContainer} />
+          <Route path="/signup" component={SignUpContainer} />
+          <Route path="/ticketlist/:id" component={TicketList} />
+          <Route path="/ticketdetails" component={TicketDetails} />
+          <Route path="/logout" component={Logout} />
+        </React.Fragment>
+      )
 }
+
+
 
 export default App;
