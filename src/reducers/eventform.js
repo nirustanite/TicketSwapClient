@@ -1,13 +1,15 @@
-import {CHANGE_EVENT_LOGIN} from '../actions/useractions'
+import {CHANGE_EVENTS} from '../actions/eventactions'
 
-const initialState = {
-    email: '',
-    password: ''
+const initialState =  {
+    eventname: '',
+    decription: '',
+    startDate: '',
+    endDate:''
 }
 
 const reducer = (state = initialState, action={}) => {
     switch(action.type){
-        case CHANGE_EVENT_LOGIN:
+        case CHANGE_EVENTS:
             return {
                 ...state,
                 ...action.payload
@@ -16,5 +18,4 @@ const reducer = (state = initialState, action={}) => {
             return state
     }
 }
-
 export default reducer

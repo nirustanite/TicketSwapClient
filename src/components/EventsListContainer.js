@@ -7,6 +7,8 @@ import ReactPaginate from 'react-paginate';
 import "bootstrap/dist/css/bootstrap.min.css";
 import Grid from '@material-ui/core/Grid';
 import {url} from '../constants'
+import { CssBaseline } from '@material-ui/core';
+import {formdisplay} from '../actions/ticketactions' 
 
 window.React = React;
 
@@ -28,6 +30,13 @@ class EventListContainer extends React.Component{
         }
     }
 
+
+    onSubmit = (e) => {
+        e.preventDefault()
+        this.props.formdisplay()
+        
+    }
+
     handlePageClick = data => {
         const selected = data.selected
         let offset = Math.ceil(selected * 9);
@@ -41,9 +50,11 @@ class EventListContainer extends React.Component{
         return(
             <React.Fragment>
                
-                {/* {this.props.eventsList.events.map(event => console.log(event))} */}
-                <EventsList  events={this.props.eventsList.events}/>
-                <Grid container spacing={1} direction="column" alignItems="center">
+                <EventsList  events={this.props.eventsList.events}
+                   onSubmit={this.onSubmit}
+                   displayForm={this.props.redirectToggle.display}/>
+                <br></br>
+                <Grid container spacing={1} direction="column" alignItems="center" >
                 <ReactPaginate
                     hideDisabled
                     breakClassName={'break-me'}
@@ -65,8 +76,9 @@ class EventListContainer extends React.Component{
 const mapStateToProps = (state) => {
     //console.log(state.eventsList)
     return{
-        eventsList:state.events
+        eventsList:state.events,
+        redirectToggle: state.redirect
     }
 }
 
-export default connect(mapStateToProps,{loadEvents})(EventListContainer)
+export default connect(mapStateToProps,{loadEvents,formdisplay})(EventListContainer)

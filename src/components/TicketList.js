@@ -11,10 +11,13 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import Link from '@material-ui/core/Link';
+import {Link} from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Image from 'material-ui-image'
 import {url} from '../constants';
+import CreateTicketFormContainer from './CreateTicketFormContainer'
+
+
 
 const useStyles = makeStyles(theme => ({
   icon: {
@@ -79,16 +82,16 @@ export default function TicketList(props) {
             {props.details && 
             <Grid container spacing={1} direction="column" alignItems="center">
             <Typography component="h3"  align="center" color="textPrimary" gutterBottom>
-              {props.details.eventname}
+              Name : {props.details.eventname}
             </Typography>
             <Typography component="h3"  align="center" color="textPrimary" gutterBottom>
-              {props.details.description}
+              Description: {props.details.description}
             </Typography>
             <Typography component="h3"  align="center" color="textPrimary" gutterBottom>
-              {props.details.startDate}
+              Start Date: {props.details.startDate}
             </Typography>
             <Typography component="h3"  align="center" color="textPrimary" gutterBottom>
-              {props.details.endDate}
+              End Date: {props.details.endDate}
             </Typography>
               </Grid>}
             <Typography variant="h5" align="center" color="textSecondary" paragraph>
@@ -100,8 +103,8 @@ export default function TicketList(props) {
           {/* End hero unit */}
           <Grid container spacing={4}>
            {props.details && props.tickets &&
-            props.tickets.map((ticket)=> (
-              <Grid item key={ticket.id} xs={12} sm={6} md={4}>
+            props.tickets.map((ticket,i)=> (
+              <Grid item key={i} xs={12} sm={6} md={4}>
                 <Card className={classes.card}>
                   {/* <CardMedia
                     className={classes.cardMedia}
@@ -121,7 +124,7 @@ export default function TicketList(props) {
                     </Typography>
                   </CardContent>
                   <CardActions>
-                  <Link href="/ticketdetails" variant="body2">
+                  <Link to={`/event/${props.details.id}/ticketdetails/${ticket.id}`} variant="body2">
                      View
                   </Link>
                   </CardActions>
@@ -138,7 +141,9 @@ export default function TicketList(props) {
                  variant="contained"
                  color="primary"
                  onClick={props.onSubmit}
-                >AddTicket</Button>}
+                >AddTicket</Button>   
+          }
+         {user.jwt && props.displayForm && <CreateTicketFormContainer />}
         </Grid>
       </main>
     </React.Fragment>

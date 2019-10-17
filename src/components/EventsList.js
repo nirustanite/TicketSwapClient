@@ -12,10 +12,11 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import Link from '@material-ui/core/Link';
+import {Link} from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import {url} from '../constants';
 import Image from 'material-ui-image'
+import CreateEventFormContainer from './CreateEventFormContainer'
 
 const useStyles = makeStyles(theme => ({
   icon: {
@@ -97,7 +98,7 @@ export default function EventsList(props) {
                     </Typography>
                   </CardContent>
                   <CardActions>
-                  <Link href={`/ticketlist/${event.id}`} variant="body2">
+                  <Link to={`/ticketlist/${event.id}`} variant="body2">
                      View
                   </Link>
                   </CardActions>
@@ -115,6 +116,7 @@ export default function EventsList(props) {
                  color="primary"
                  onClick={props.onSubmit}
                 >AddEvent</Button>}
+            {user.jwt && props.displayForm && <CreateEventFormContainer />}
         </Grid>
       </main>
     </React.Fragment>

@@ -26,6 +26,15 @@ export const changeEvent = (key, value) => {
      }
  }
 
+ export const changeEventLogin = (key, value) => {
+    return {
+         type: CHANGE_EVENT_LOGIN,
+         payload:{
+             [key]: value
+         }
+     }
+ }
+
 export const getMessage = (message) =>  {
     return {
         type: MESSAGE,
@@ -65,11 +74,16 @@ export const login = (data) => (dispatch) => {
             console.log('what is response.body?', response.body)
             dispatch(userLoginSuccess(response.body))
           })
-          .catch(console.error)
+          .catch(error => {
+            console.error(error);
+            console.log('Response message:', error.response.body.message)
+            dispatch(getMessage(error.response.body.message))
+        })
 }
 
 
 export const CHANGE_EVENT = 'CHANGE_EVENT';
+export const CHANGE_EVENT_LOGIN = 'CHANGE_EVENT_LOGIN';
 export const REDIRECT = 'REDIRECT';
 export const USER_LOGIN_SUCCESS = 'USER_LOGIN_SUCCESS';
 export const MESSAGE = 'MESSAGE';
