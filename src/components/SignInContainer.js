@@ -1,9 +1,11 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {changeEvent} from '../actions/useractions'
+import {changeEventLogin} from '../actions/useractions'
 import {submitEvent} from '../actions/useractions'
 import {login} from '../actions/useractions'
 import SignIn from './SignIn'
+import Typography from '@material-ui/core/Typography';
+import CssBaseline from '@material-ui/core/CssBaseline';
 
 class SignInContainer extends React.Component{
 
@@ -16,7 +18,7 @@ class SignInContainer extends React.Component{
     }
 
     onChange = (event) => {
-        this.props.changeEvent(event.target.name, event.target.value)
+        this.props.changeEventLogin(event.target.name, event.target.value)
     }
 
     onSubmit = (event) => {
@@ -32,6 +34,8 @@ class SignInContainer extends React.Component{
     render(){
         return (
             <React.Fragment>
+                 <CssBaseline />
+               <Typography align="center" color="textPrimary">{this.props.message}</Typography>
                 <SignIn onSubmit={this.onSubmit}
                 onChange={this.onChange}
                 values={this.props.values} />
@@ -43,7 +47,8 @@ class SignInContainer extends React.Component{
 
 const mapStateToProps = (state) => ({
      values:state.login,
-     user: state.user
+     user: state.user,
+     message: state.messages
 })
 
-export default connect(mapStateToProps,{changeEvent,login})(SignInContainer)
+export default connect(mapStateToProps,{changeEventLogin,login})(SignInContainer)
