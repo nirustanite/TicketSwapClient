@@ -11,6 +11,8 @@ import ticketDetail from './ticketDetail'
 import eventform from './eventform'
 import ticketinfo from './ticketdetailfetch'
 import streamdata from './streamdata'
+import changecommnets from './changeComments'
+import comments from './comments'
 
 export default combineReducers({
    createUser,
@@ -24,5 +26,7 @@ export default combineReducers({
    ticketDetail,
    eventform,
    ticketinfo,
-   streamdata
+   streamdata,
+   changecommnets,
+   comments
 })
