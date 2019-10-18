@@ -11,7 +11,7 @@ class AddCommentContainer extends React.Component{
       }
 
       onSubmit = (event) => {
-        //event.preventDefault()
+        event.preventDefault()
         this.props.createComment(this.props.ticketinfo.id,this.props.values)
         this.props.updateformdisplay()
 
