@@ -10,6 +10,7 @@ const reducer = (state=initialState, action={}) =>{
         case REDIRECT:
             return {...action.payload}
         case FORM_DISPLAY:
+            console.log(action.payload)
             return {...action.payload}
         default:
             return state

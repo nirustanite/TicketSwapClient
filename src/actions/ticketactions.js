@@ -1,7 +1,6 @@
 import request from 'superagent';
 import {url} from '../constants';
-import {getMessage} from './useractions'
-import upload from 'superagent'
+
  
 const listOfTickets = (tickets) => {
     return{

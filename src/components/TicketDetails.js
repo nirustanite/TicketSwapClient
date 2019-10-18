@@ -15,7 +15,7 @@ import {Link} from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Image from 'material-ui-image';
 import {url} from '../constants'
-import CreateTicketForm from './CreateTicketForm';
+import AddCommentContainer from './AddCommentContainer';
 
 
 const useStyles = makeStyles(theme => ({
@@ -69,6 +69,8 @@ export default function TicketDetails(props) {
   console.log(props.ticket)
   console.log(props.data)
   console.log(props.id)
+  console.log(props.comments)
+  console.log("display form",props.displayForm)
 
   const user = useSelector(state => state.user);
 
@@ -114,9 +116,25 @@ export default function TicketDetails(props) {
             </Typography>
             
               </Grid>}
-           
+              {props.comments && 
+              <Grid container spacing={1} direction="column" alignItems="center">
+                <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
+                        Comments
+                </Typography>
+                <Typography component="h3"  align="center" color="textPrimary" gutterBottom>
+                      {user.firstname}
+                </Typography>
+                {props.comments.map(comment => (
+                     <Typography component="h3"  align="center" color="textPrimary" gutterBottom>
+                      {comment.comment}
+                    </Typography>
+              
+                ))}
+
+             </Grid>}
+             
           </Container>
-          {/* {user.jwt && 
+          {user.jwt && 
              <Grid container spacing={1} direction="column" alignItems="center">
               <Button
                  align="center"
@@ -124,8 +142,9 @@ export default function TicketDetails(props) {
                  variant="contained"
                  color="primary"
                  onClick={props.onSubmit}
-                >Add Comment</Button>  
-        </Grid>} */}
+                >Add Comment</Button> 
+            {user.jwt && props.displayForm && <AddCommentContainer />} 
+        </Grid>}
         </div>
         
       </main>

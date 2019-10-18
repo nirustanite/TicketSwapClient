@@ -21,8 +21,6 @@ class CreateEventFormContainer extends React.Component{
 
       onSubmit = (event) => {
         event.preventDefault()
-        const data = new FormData()
-        data.append('file', this.state.selectedFile)
         //console.log(this.props.eventinfo.id,this.props.values,this.state.selectedFile)
         this.props.createEvent(this.props.values,this.state.selectedFile)
         this.props.updateformdisplay()
