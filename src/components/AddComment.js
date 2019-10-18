@@ -41,7 +41,7 @@ export default function AddComment(props) {
       <CssBaseline />
       <div className={classes.paper}>
         <Typography component="h1" variant="h5">
-           Add Ticket
+           Add Comment
         </Typography>
         <form className={classes.form} >
           <Grid container spacing={2}>
