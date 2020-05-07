@@ -1,8 +1,8 @@
-import React from 'react'
-import CreateEventForm from './CreateEventForm'
-import {updateformdisplay} from '../actions/ticketactions'
-import{changeEvents,createEvent} from '../actions/eventactions'
-import {connect} from 'react-redux'
+import React from 'react';
+import CreateEventForm from './CreateEventForm';
+import {updateformdisplay} from '../actions/ticketactions';
+import{changeEvents,createEvent} from '../actions/eventactions';
+import {connect} from 'react-redux';
 
 
 class CreateEventFormContainer extends React.Component{
@@ -21,15 +21,12 @@ class CreateEventFormContainer extends React.Component{
 
       onSubmit = (event) => {
         event.preventDefault()
-        //console.log(this.props.eventinfo.id,this.props.values,this.state.selectedFile)
         this.props.createEvent(this.props.values,this.state.selectedFile)
         this.props.updateformdisplay()
 
      }
 
       onChangeHandler=event=>{
-        console.log("onChange")
-        console.log(event.target.files[0])
         this.setState({
             selectedFile: event.target.files[0],
           })
@@ -39,6 +36,7 @@ class CreateEventFormContainer extends React.Component{
         
         return(
             <React.Fragment>
+                    <br />
                     {this.props.user.jwt && <input type="file" name="file" onChange={this.onChangeHandler}/>}
                     <CreateEventForm
                     onValueChange={this.onChange}

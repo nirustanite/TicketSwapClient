@@ -17,23 +17,6 @@ export const redirect = () => ({
     }
 })
 
-export const changeEvent = (key, value) => {
-    return {
-         type: CHANGE_EVENT,
-         payload:{
-             [key]: value
-         }
-     }
- }
-
- export const changeEventLogin = (key, value) => {
-    return {
-         type: CHANGE_EVENT_LOGIN,
-         payload:{
-             [key]: value
-         }
-     }
- }
 
 export const getMessage = (message) =>  {
     return {

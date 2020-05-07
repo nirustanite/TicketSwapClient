@@ -1,7 +1,7 @@
-import React from 'react'
-import CreateTicketForm from './CreateTicketForm'
-import {changeEventTickets,createTicket,submitEvent,updateformdisplay} from '../actions/ticketactions'
-import {connect} from 'react-redux'
+import React from 'react';
+import CreateTicketForm from './CreateTicketForm';
+import {changeEventTickets,createTicket,updateformdisplay} from '../actions/ticketactions';
+import {connect} from 'react-redux';
 
 class CreateTicketFormContainer extends React.Component{
 
@@ -27,8 +27,6 @@ class CreateTicketFormContainer extends React.Component{
      }
 
       onChangeHandler=event=>{
-        console.log("onChange")
-        console.log(event.target.files[0])
         this.setState({
             selectedFile: event.target.files[0],
           })
@@ -38,6 +36,7 @@ class CreateTicketFormContainer extends React.Component{
         
         return(
             <React.Fragment>
+                    <br />
                     {this.props.user.jwt && <input type="file" name="file" onChange={this.onChangeHandler}/>}
                     <CreateTicketForm
                     onValueChange={this.onChange}
@@ -58,4 +57,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps,{changeEventTickets,createTicket,submitEvent,updateformdisplay})(CreateTicketFormContainer)
+export default connect(mapStateToProps,{changeEventTickets,createTicket,updateformdisplay})(CreateTicketFormContainer)

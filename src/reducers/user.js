@@ -6,7 +6,7 @@ const reducer = (state = {}, action={}) => {
         case USER_LOGIN_SUCCESS:
             return {...state, ...action.event}
         case USER_LOGOUT:
-            return {...state, user: {}}
+            return {}
         default:
             return state
     }

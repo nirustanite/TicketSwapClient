@@ -3,7 +3,6 @@ import {url} from '../constants';
 
 
 const listOfEvents = (data) => {
-    console.log("events",data)
    return{
        type:EVENTS_FETCHED,
        data
@@ -17,7 +16,6 @@ const eventDetailFetch = event => ({
 
 
 const eventCreateSuccess = (data) => {
-    console.log("ticket create success",data)
     return{
         type: EVENT_CREATE_SUCCESS,
         data
@@ -33,16 +31,11 @@ export const changeEvents = (key, value) => {
      }
  }
 
-
-
-
 export const loadEvents = (data) => (dispatch) => {
-    console.log("inside loadevents")
     request
         .get(`${url}/event`)
         .query(data)
         .then(response => {
-            console.log(response.body);
             dispatch(listOfEvents(response.body))
         })
         .catch(err => console.error(err))
@@ -52,7 +45,6 @@ export const eventDetails = (id) => (dispatch) =>{
     request
         .get(`${url}/event/${id}`)
         .then(response => {
-            console.log(response.body);
             dispatch(eventDetailFetch(response.body))
         })
 }
@@ -69,9 +61,7 @@ export const createEvent = (data,file) => (dispatch,getState) => {
         .field("startDate",data.startDate)
         .field("endDate",data.endDate)
         .then(response => {
-            console.log(response.body)
             dispatch(eventCreateSuccess(response.body))
-            //imageupload(eventid,file)
         })
         .catch(error => {
             console.error(error);
