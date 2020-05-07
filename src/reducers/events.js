@@ -1,10 +1,11 @@
-import {EVENTS_FETCHED} from '../actions/eventactions'
+import {EVENTS_FETCHED, EVENT_CREATE_SUCCESS} from '../actions/eventactions'
 
-const reducer = (state={}, action={}) =>{
-    console.log("inside reducer",action.data)
+const reducer = (state=[], action={}) =>{
     switch(action.type){
         case EVENTS_FETCHED:
-            return {...action.data}
+            return action.data
+        case EVENT_CREATE_SUCCESS:
+            return [...state, action.data.event]
         default:
             return state
     }

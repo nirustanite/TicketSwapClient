@@ -1,6 +1,4 @@
 import { combineReducers } from 'redux'
-import createUser from './createUser'
-import login from './userLogin'
 import messages from './messages'
 import redirect from './redirect'
 import user from './user'
@@ -10,13 +8,8 @@ import tickets from './tickets'
 import ticketDetail from './ticketDetail'
 import eventform from './eventform'
 import ticketinfo from './ticketdetailfetch'
-import streamdata from './streamdata'
-import changecommnets from './changeComments'
-import comments from './comments'
 
 export default combineReducers({
-   createUser,
-   login,
    messages,
    redirect,
    user,
@@ -26,7 +19,4 @@ export default combineReducers({
    ticketDetail,
    eventform,
    ticketinfo,
-   streamdata,
-   changecommnets,
-   comments
 })

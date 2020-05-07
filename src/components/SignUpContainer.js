@@ -1,18 +1,28 @@
-import React from 'react'
-import {connect} from 'react-redux'
-import SignUp from './SignUp'
-import {redirect,signup,changeEvent} from '../actions/useractions'
+import React from 'react';
+import {connect} from 'react-redux';
+import SignUp from './SignUp';
+import {redirect,signup} from '../actions/useractions';
 import Typography from '@material-ui/core/Typography';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
 class SignUpContainer extends React.Component{
+
+
+    state = {
+        firstname: '',
+        lastname: '',
+        email: '',
+        password: '',
+       
+    } 
+
    onChange = (event) => {
-       this.props.changeEvent(event.target.name, event.target.value)
+    this.setState({
+        [event.target.name]: event.target.value
+      })
    }
 
    componentDidUpdate(){
-       console.log("this.props.message",this.props.message)
-       console.log(this.props.redirectToggle.redirect)
        if(this.props.redirectToggle.redirect){
            if(this.props.message === 'User Created Successfully! Please Login. You will be redirected to Login Page')
              {
@@ -25,13 +35,11 @@ class SignUpContainer extends React.Component{
 
    onSubmit = (event) => {
        event.preventDefault()
-       console.log(this.props.values)
-       this.props.signup(this.props.values)
+       this.props.signup(this.state)
        this.props.redirect()
 
    }
    render(){
-       console.log('render signup comp state message', this.props.values)
        return(
            <React.Fragment>
                <CssBaseline />
@@ -39,19 +47,17 @@ class SignUpContainer extends React.Component{
            <SignUp
            onSubmit={this.onSubmit}
            onChange={this.onChange}
-           values={this.props.values} />
+           values={this.state} />
            </React.Fragment>
        )
    }
 }
 const mapStateToProps = (state) => {
-   console.log('state in mapstate to props', state)
    return{
-       values: state.createUser,
        message: state.messages,
        redirectToggle:state.redirect
    }
 }
 
 
-export default connect(mapStateToProps,{changeEvent,signup,redirect})(SignUpContainer)
+export default connect(mapStateToProps,{signup,redirect})(SignUpContainer)

@@ -1,4 +1,4 @@
-import {CHANGE_EVENT_TICKET,SUBMIT_EVENT,TICKET_UPDATE_SUCCESS} from '../actions/ticketactions'
+import {CHANGE_EVENT_TICKET,TICKET_UPDATE_SUCCESS} from '../actions/ticketactions'
 
 const initialState =  {
     price: '',

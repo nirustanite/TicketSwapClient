@@ -2,26 +2,22 @@ import React from 'react';
 import {loadEvents} from '../actions/eventactions';
 import { connect } from 'react-redux';
 import EventsList from './EventsList';
-import Pagination from "react-js-pagination";
 import ReactPaginate from 'react-paginate';
 import "bootstrap/dist/css/bootstrap.min.css";
 import Grid from '@material-ui/core/Grid';
-import {url} from '../constants'
-import { CssBaseline } from '@material-ui/core';
-import {formdisplay} from '../actions/ticketactions' 
+import {formdisplay} from '../actions/ticketactions';
 
-window.React = React;
 
 class EventListContainer extends React.Component{
 
     constructor(props) {
         super(props);
         this.state = {
-          offset: 0
+          offset: 0,
         };
       }
 
-    componentDidMount(){
+    componentWillMount(){
         this.props.loadEvents({limit: 9, offset: this.state.offset })
         if(this.props.eventsList.events){
             this.setState({
@@ -46,13 +42,11 @@ class EventListContainer extends React.Component{
       }
 
     render(){
-        console.log(this.props.eventsList.events);
         return(
             <React.Fragment>
-               
-                <EventsList  events={this.props.eventsList.events}
+                {this.props.eventsList && <EventsList events={this.props.eventsList.events}
                    onSubmit={this.onSubmit}
-                   displayForm={this.props.redirectToggle.display}/>
+                   displayForm={this.props.redirectToggle.display}/>}
                 <br></br>
                 <Grid container spacing={1} direction="column" alignItems="center" >
                 <ReactPaginate
@@ -74,7 +68,6 @@ class EventListContainer extends React.Component{
 }
 
 const mapStateToProps = (state) => {
-    //console.log(state.eventsList)
     return{
         eventsList:state.events,
         redirectToggle: state.redirect
@@ -82,3 +75,6 @@ const mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps,{loadEvents,formdisplay})(EventListContainer)
+
+
+
